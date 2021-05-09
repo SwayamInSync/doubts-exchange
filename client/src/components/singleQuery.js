@@ -6,6 +6,7 @@ import { Alert, Jumbotron, Container } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import DisplayComments from "./displayComments";
 import ModalComment1 from "./modalComment1";
+import ReactLoading from "react-loading";
 
 function SingleQuery({ feed = {}, getQuery, currentUser, loading }) {
   const { id } = useParams();
@@ -15,19 +16,35 @@ function SingleQuery({ feed = {}, getQuery, currentUser, loading }) {
 
   return (
     <>
-      <Jumbotron fluid>
-        <Container style={{ paddingTop: "10px" }}>
-          <h1>{feed.title}</h1>
-          {feed.solved && <Alert variant="success">This query is solved</Alert>}
-          <h5>
-            <ReactMarkdown>{feed.body}</ReactMarkdown>
-          </h5>
-          <p>posted on: {feed.date}</p>
-          <p>{currentUser && !feed.solved && <ModalComment1 id={id} />}</p>
-          <hr />
-          <DisplayComments id={id} {...currentUser} {...feed} />
+      {loading ? (
+        <Container
+          className="d-flex align-items-center justify-content-center"
+          style={{ minHeight: "100vh" }}
+        >
+          <ReactLoading
+            type="spinningBubbles"
+            color="grey"
+            height={50}
+            width={50}
+          />
         </Container>
-      </Jumbotron>
+      ) : (
+        <Jumbotron fluid>
+          <Container style={{ paddingTop: "10px" }}>
+            <h1>{feed.title}</h1>
+            {feed.solved && (
+              <Alert variant="success">This query is solved</Alert>
+            )}
+            <h5>
+              <ReactMarkdown>{feed.body}</ReactMarkdown>
+            </h5>
+            <p>posted on: {feed.date}</p>
+            <p>{currentUser && !feed.solved && <ModalComment1 id={id} />}</p>
+            <hr />
+            <DisplayComments id={id} {...currentUser} {...feed} />
+          </Container>
+        </Jumbotron>
+      )}
     </>
   );
 }

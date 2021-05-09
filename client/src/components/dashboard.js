@@ -14,6 +14,7 @@ function Dashboard({
   data,
   getFeeds,
   username,
+  loading,
 }) {
   const [reload, setReload] = useState(false);
   const handleSolved = async (id) => {
@@ -86,6 +87,7 @@ const mapStateToProps = (state) => {
     currentUser: state.currentUser.user,
     data: state.myFeed.data,
     username: state.myFeed.username,
+    loading: state.myFeed.loading,
   };
 };
 

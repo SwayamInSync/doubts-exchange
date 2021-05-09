@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import axios from "axios";
 import { Button, ListGroup, Card } from "react-bootstrap";
 
-function DisplayComments({ id, email, comment, solved, author }) {
+function DisplayComments({ id, email, comment, author }) {
   const handleSolved = async (c_id, p_id) => {
     await axios.post("/solution-comment", { c_id, p_id });
   };

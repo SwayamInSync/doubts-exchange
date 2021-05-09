@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Container } from "react-bootstrap";
 import { fetchSolvedFeeds } from "../redux/general/solvedFeeds/solvedFeedsAction";
+import ReactLoading from "react-loading";
 
 export const SolvedFeeds = ({ allFeeds = [], fetchData, loading }) => {
   useEffect(() => {
@@ -11,7 +12,17 @@ export const SolvedFeeds = ({ allFeeds = [], fetchData, loading }) => {
   return (
     <div>
       {loading ? (
-        <h2>Loading</h2>
+        <Container
+          className="d-flex align-items-center justify-content-center"
+          style={{ minHeight: "100vh" }}
+        >
+          <ReactLoading
+            type="spinningBubbles"
+            color="grey"
+            height={50}
+            width={50}
+          />
+        </Container>
       ) : (
         allFeeds.map((item, index) => {
           return (

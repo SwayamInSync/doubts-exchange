@@ -13,6 +13,7 @@ const myFeedsReducer = (state = initialState, action) => {
       ...state,
       data: action.payload.feeds.posts,
       username: action.payload.feeds.username,
+      loading: false,
     };
   }
 
