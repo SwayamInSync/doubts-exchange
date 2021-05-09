@@ -2,12 +2,18 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import path from "path";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 dotenv.config();
 const Schema = mongoose.Schema;
 
 let today = new Date().toDateString();
+const PORT = process.env.PORT || 5000;
 
 const newUri = process.env.MONGODB_URI;
 mongoose.connect(newUri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -17,6 +23,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 // creating Schema
 
@@ -212,7 +219,9 @@ app.post("/solution-comment", (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
