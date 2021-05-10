@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Doubts Exchange",
+  "name": "Doubts Exchange",
+  "description": "Question answering platform for tech related doubts.",
   "icons": [
     {
       "src": "favicon.ico",
