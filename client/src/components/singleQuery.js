@@ -39,7 +39,15 @@ function SingleQuery({ feed = {}, getQuery, currentUser, loading }) {
               <ReactMarkdown>{feed.body}</ReactMarkdown>
             </h5>
             <p>posted on: {feed.date}</p>
-            <p>{currentUser && !feed.solved && <ModalComment1 id={id} />}</p>
+            <p>
+              {currentUser && !feed.solved ? (
+                <ModalComment1 id={id} />
+              ) : (
+                <Alert variant="danger">
+                  You need to login or register before adding your reply
+                </Alert>
+              )}
+            </p>
             <hr />
             <DisplayComments id={id} {...currentUser} {...feed} />
           </Container>

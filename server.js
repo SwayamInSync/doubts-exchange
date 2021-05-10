@@ -16,7 +16,10 @@ let today = new Date().toDateString();
 const PORT = process.env.PORT || 5000;
 
 const newUri = process.env.MONGODB_URI;
-mongoose.connect(newUri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(newUri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
