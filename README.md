@@ -14,7 +14,7 @@ People can ask their doubts or queries using **markdown** format and keep track 
 - Firebase
 ## Installation
 
-Use the package manager [npm](https://www.npmjs.com/) to install requirements for blog.
+Use the package manager [npm](https://www.npmjs.com/) to install requirements for doubt-exchange.
 ```bash
 npm install
 ```
